@@ -52,8 +52,6 @@ def tranform_seq(inputs):
 
 def preprocessing_fn(inputs):
     outputs = {}
-    outputs['input'] = tranform_seq(inputs[INPUT_KEY])
-    temp = tranform_seq(inputs[TARGET_KEY])
-    outputs['decoder_input'] = tf.concat([tf.fill([tf.shape(temp)[0], 1], '<start>'), temp], 1)
-    outputs['decoder_target'] = tf.concat([temp, tf.fill([tf.shape(temp)[0], 1], '<end>')], 1)   
+    outputs['inputs'] = tranform_seq(inputs[INPUT_KEY])
+    outputs['targets'] = tf.strings.join(['<SOS>', tranform_seq(inputs[TARGET_KEY]), '<EOS>'], separator=' ')
     return outputs

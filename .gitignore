@@ -2,3 +2,5 @@
 *data
 *pipelines
 *metadata
+*my_transformer.py
+*.pyc
